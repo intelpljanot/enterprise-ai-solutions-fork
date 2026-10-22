@@ -74,6 +74,7 @@
               runAsGroup: 65534
               seccompProfile:
                 type: RuntimeDefault
+            terminationGracePeriodSeconds: 0
             containers:
               - name: probe
                 # Minimal (~5 MB) image: only a shell + coreutils are needed to

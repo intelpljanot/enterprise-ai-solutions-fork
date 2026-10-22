@@ -131,10 +131,15 @@
 # avoid leaving a privileged DaemonSet running on every node indefinitely.
 - name: "nri_cpu_balloons | Delete topology optimizer DaemonSet"
   kubernetes.core.k8s:
+    api_version: apps/v1
     kind: DaemonSet
     name: node-topology-optimizer
     namespace: "{{ nri_cpu_balloons.namespace }}"
     state: absent
+    delete_options:
+      propagationPolicy: Foreground
+    wait: true
+    wait_timeout: 120
   failed_when: false
 
 # --- Step 4: render values file ---
